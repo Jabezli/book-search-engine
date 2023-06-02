@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { REMOVE_BOOK } from "../utils/mutations";
 
-import { getMe, deleteBook } from "../utils/API";
+// import { getMe, deleteBook } from "../utils/API";
 import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 
@@ -19,19 +19,17 @@ const SavedBooks = () => {
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
-    console.log("hi");
-
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
       return false;
     }
-
+    console.log(bookId);
     try {
       await removeBook({ variables: { bookId } });
 
       removeBookId(bookId);
-      window.location.replace("/saved");
+      // window.location.replace("/saved");
     } catch (err) {
       console.error(err);
     }

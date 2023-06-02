@@ -71,11 +71,13 @@ const resolvers = {
     removeBook: async (parent, { bookId }, context) => {
       try {
         if (context.user) {
+          console.log(bookId);
           const user = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $pull: { savedBooks: bookId } },
+            { $pull: { savedBooks: { bookId: bookId } } },
             { new: true }
           );
+          console.log(user);
           return user;
         }
         throw new AuthenticationError("Please login first.");
