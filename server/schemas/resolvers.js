@@ -7,9 +7,7 @@ const resolvers = {
     me: async (parent, args, context) => {
       try {
         if (context.user) {
-          return User.findById({ _id: context.user._id }).populate(
-            "savedBooks"
-          );
+          return User.findOne({ _id: context.user._id }).populate("savedBooks");
         }
 
         throw new AuthenticationError("Please login first.");
@@ -74,7 +72,7 @@ const resolvers = {
       try {
         if (context.user) {
           const user = await User.findOneAndUpdate(
-            { _id: context.user_id },
+            { _id: context.user._id },
             { $pull: { savedBooks: bookId } },
             { new: true }
           );
