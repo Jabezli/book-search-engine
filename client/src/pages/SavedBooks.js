@@ -29,7 +29,7 @@ const SavedBooks = () => {
       await removeBook({ variables: { bookId } });
 
       removeBookId(bookId);
-      // window.location.replace("/saved");
+      window.location.reload("/saved");
     } catch (err) {
       console.error(err);
     }
