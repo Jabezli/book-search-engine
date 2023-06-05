@@ -52,6 +52,7 @@ const resolvers = {
     },
 
     saveBook: async (parent, { book }, context) => {
+      console.log({ book });
       try {
         if (context.user) {
           const user = await User.findOneAndUpdate(
